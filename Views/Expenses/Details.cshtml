@@ -1,0 +1,35 @@
+﻿@model ExpenseTrackerApp.Models.Expenses
+
+@{
+    ViewData["Title"] = "Expense Details";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <h2 class="mb-4 text-primary">Expense Details</h2>
+            <dl class="row">
+                <dt class="col-sm-3 fw-semibold">@Html.DisplayNameFor(model => model.Title)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Title)</dd>
+
+                <dt class="col-sm-3 fw-semibold">@Html.DisplayNameFor(model => model.Amount)</dt>
+                <dd class="col-sm-9">₹@Html.DisplayFor(model => model.Amount)</dd>
+
+                <dt class="col-sm-3 fw-semibold">@Html.DisplayNameFor(model => model.Date)</dt>
+                <dd class="col-sm-9">@Model.Date.ToString("dd MMM yyyy")</dd>
+
+                <dt class="col-sm-3 fw-semibold">@Html.DisplayNameFor(model => model.Category)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Category)</dd>
+            </dl>
+
+            <div class="mt-4">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary me-2">
+                    <i class="bi bi-pencil-square"></i> Edit
+                </a>
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left-circle"></i> Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

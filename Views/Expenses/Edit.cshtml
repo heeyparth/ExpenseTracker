@@ -1,0 +1,65 @@
+﻿@model ExpenseTrackerApp.Models.Expenses
+
+@{
+    ViewData["Title"] = "Edit Expense";
+    var today = DateTime.Now.ToString("yyyy-MM-dd");
+
+}
+
+<div class="container mt-5">
+    <h2 class="text-primary mb-4">Edit Expense</h2>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="mb-3">
+                    <label asp-for="Category" class="form-label fw-bold"></label>
+                    @Html.DropDownListFor(model => model.Category,
+                             new SelectList(Enum.GetValues(typeof(ExpenseTrackerApp.Models.Category))),
+                             "-- Select Category --",
+                             new { @class = "form-select" })
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label fw-bold"></label>
+                    <input asp-for="Title" class="form-control" placeholder="e.g., Grocery, Fuel" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Amount" class="form-label fw-bold"></label>
+                    <input asp-for="Amount" class="form-control" placeholder="Amount in ₹" />
+                    <span asp-validation-for="Amount" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Date" class="form-label fw-bold"></label>
+                    <input asp-for="Date" type="date" class="form-control" max="@today" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save2"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left-circle"></i> Back to List
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
